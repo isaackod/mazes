@@ -1,0 +1,12 @@
+{
+    "Maze Type": "Sidewinder",
+    "Dims": [2,3],
+    "cells":[
+    {"loc": [0,0], "weight":120, "open":["S","E"]},
+    {"loc": [1,0], "weight":50, "open":["W"]},
+    {"loc": [0,1], "weight":150, "open":["N","E"]},
+    {"loc": [1,1], "weight":200, "open":["W","S"]},
+    {"loc": [0,2], "weight":250, "open":["E"]},
+    {"loc": [1,2], "weight":220, "open":["W","N"]}
+    ]
+}
