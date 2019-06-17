@@ -1,6 +1,6 @@
 {
-    "Maze Type": "Sidewinder",
-    "Dims": [2,3],
+    "maze_type": "Sidewinder",
+    "dims": [2,3],
     "cells":[
     {"loc": [0,0], "weight":120, "open":["S","E"]},
     {"loc": [1,0], "weight":50, "open":["W"]},

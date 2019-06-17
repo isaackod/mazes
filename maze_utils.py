@@ -1,6 +1,8 @@
 """Basic Classes for Maze construction"""
 
 import random
+import json
+from path import Path
 
 
 class Array(object):
@@ -40,6 +42,7 @@ class Cell(object):
         self._row = row
         self._col = col
         self._links = {}
+        self.weight = 0
         # TODO: make these properties the right way 
         self.north, self.south, self.east, self.west = None, None, None, None
         
@@ -164,3 +167,36 @@ class Grid(object):
         for row in self._grid:
             for cell in row:
                 yield cell if cell else None
+
+"""for saving maze to file to load in java"""
+def create_json(maze):
+    cells = []
+    for row in maze.each_row():
+        for cell in row:
+            dirs = []
+            loc = []
+            if cell.is_linked(cell.north):
+                dirs.append("N")
+            if cell.is_linked(cell.east):
+                dirs.append("E")
+            if cell.is_linked(cell.south):
+                dirs.append("S")
+            if cell.is_linked(cell.west):
+                dirs.append("W")
+            loc.append(cell.col)
+            loc.append(cell.row)
+            cells.append({"loc":loc, "weight": cell.weight, "open": dirs})
+
+    json_object = {}
+    json_object["maze_type"] = "Sidewinder"
+    json_object["dims"] = [maze.cols,maze.rows]
+    json_object["cells"] = cells
+    return json_object
+
+def save_maze_json(maze,filename):
+    path = Path('.')
+    json_object = create_json(maze)
+    with open(path/"frontend"/"saved_mazes"/filename+".json", 'w') as file:  # Use file to refer to the file object
+        file.write(
+            json.dumps(json_object, indent = 4)
+        )

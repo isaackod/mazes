@@ -1,19 +1,21 @@
 
-			//Width and height
-			var width = 400;
-			var height = 400;
+
 
             // Data loading is asynch, so all code is in this block
-            d3.json("default_maze.json").then(function(cells){
+            d3.json("saved_mazes/sidewinder.json").then(function(cells){
 
-                    
-                var xScale = d3.scaleBand()
-                                .domain(d3.range(cells.Dims[0]))
+                //Width and height
+                var width = 2000;
+                var aspect_r = cells.dims[0]/cells.dims[1];
+                var height = Math.floor(width/aspect_r);
+            
+               var xScale = d3.scaleBand()
+                                .domain(d3.range(cells.dims[0]))
                                 .rangeRound([0,width])
                                 .paddingInner(0.00);
 
                 var yScale = d3.scaleBand()
-                                .domain(d3.range(cells.Dims[1]))
+                                .domain(d3.range(cells.dims[1]))
                                 .rangeRound([0,height])
                                 .paddingInner(0.00);
 
@@ -149,8 +151,8 @@
     
 
                 d3.selectAll("line")
-                    .attr("stroke-width", 3)
-                    .attr("stroke", 'red');
+                    .attr("stroke-width", 1)
+                    .attr("stroke", 'blue');
 
 
 			});
